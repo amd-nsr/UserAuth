@@ -31,4 +31,10 @@ To Run The project You Need To
 
   $ python manage.py runserver
   
+  **samples**
   
+![Req](https://github.com/amd-nsr/UserAuth/blob/master/sample/req.png)
+
+
+![Res](https://github.com/amd-nsr/UserAuth/blob/master/sample/res.png)
+
