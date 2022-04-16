@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
@@ -52,27 +51,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name', 'country_code', 'phone_number', 'password' ,'gender', 'birthdate','avatar', 'email',)
         #extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
-        phone_number = validated_data['phone_number']
-        password = validated_data['password']
-        first_name = validated_data.get('first_name') or None
-        last_name = validated_data.get('last_name') or None
-        country_code = validated_data.get('country_code') or None
-        gender = validated_data.get('gender') or None
-        birthdate = validated_data.get('birthdate') or None
-        avatar = validated_data.get('avatar') or None
-        email = validated_data.get('email') or None
-
-        user = User.objects.create_user(
-                    phone_number = phone_number, 
-                    password = password, 
-                    first_name = first_name, 
-                    last_name = last_name, 
-                    country_code = country_code, 
-                    gender = gender, 
-                    birthdate = birthdate, 
-                    avatar = avatar, 
-                    email = email, 
-                )
-
-        return user

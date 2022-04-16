@@ -55,17 +55,15 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
-    ]
+    ],
+    'EXCEPTION_HANDLER': 'users.utils.custom_exception_handler'
 }
 
 REST_KNOX = {
-  #'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
   'AUTH_TOKEN_CHARACTER_LENGTH': 64,
   'TOKEN_TTL': timedelta(hours=10),
-  #'USER_SERIALIZER': 'knox.serializers.UserSerializer',
   'TOKEN_LIMIT_PER_USER': None,
   'AUTO_REFRESH': False,
-  #'EXPIRY_DATETIME_FORMAT': api_settings.DATETME_FORMAT,
 }
 
 AUTH_USER_MODEL = 'users.CustomUser'
