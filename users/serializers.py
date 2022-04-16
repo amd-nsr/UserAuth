@@ -42,19 +42,37 @@ class CustomAuthTokenSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        #fields =  '__all__'
-        exclude = ('password', )
-        #fields = ('id', 'phone_number', 'email')
+        fields = ('id', 'first_name', 'last_name', 'country_code', 'phone_number', 'gender', 'birthdate',)
 
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'phone_number', 'password')
+        fields = ('id', 'first_name', 'last_name', 'country_code', 'phone_number', 'password' ,'gender', 'birthdate','avatar', 'email',)
         #extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['phone_number'], validated_data['password'])
+        phone_number = validated_data['phone_number']
+        password = validated_data['password']
+        first_name = validated_data.get('first_name') or None
+        last_name = validated_data.get('last_name') or None
+        country_code = validated_data.get('country_code') or None
+        gender = validated_data.get('gender') or None
+        birthdate = validated_data.get('birthdate') or None
+        avatar = validated_data.get('avatar') or None
+        email = validated_data.get('email') or None
+
+        user = User.objects.create_user(
+                    phone_number = phone_number, 
+                    password = password, 
+                    first_name = first_name, 
+                    last_name = last_name, 
+                    country_code = country_code, 
+                    gender = gender, 
+                    birthdate = birthdate, 
+                    avatar = avatar, 
+                    email = email, 
+                )
 
         return user
